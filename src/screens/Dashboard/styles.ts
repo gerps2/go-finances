@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Feather } from '@expo/vector-icons';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { FlatList } from 'react-native';
+import { DatalistProps } from './index'
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
     flex: 1;
@@ -54,6 +58,8 @@ export const UserName = styled.Text`
     font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
+export const LogoutButton = styled(BorderlessButton)`
+`;
 
 export const Icon = styled(Feather)`
     font-size: ${RFValue(24)}px;
@@ -82,6 +88,12 @@ export const Title = styled.Text`
     margin-bottom: 16px;
 `;
 
-export const TransactionsList = styled.FlatList`
-    
-`;
+export const TransactionsList = styled(
+    FlatList as new () => FlatList<DatalistProps>
+    ).attrs({
+    showsVerticalScrollIndicator: false,
+    contentContainerStyle:{ 
+        paddingBottom: getBottomSpace() 
+    }
+})``;
+
